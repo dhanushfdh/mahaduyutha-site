@@ -236,10 +236,6 @@ const Hero = ({ setCurrentView }) => (
         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
         <span className="relative">Explore Products</span>
       </button>
-      <button onClick={() => setCurrentView('about')} className="px-8 py-4 bg-white/5 text-white font-medium rounded-full border border-white/10 backdrop-blur-md transition-all hover:bg-white/10 hover:border-white/20 w-full sm:w-auto flex items-center justify-center space-x-2">
-        <span>Get a Quote</span>
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-      </button>
       <a
         href="/brochure.pdf"
         download="MAHADHYUTHA_Acoustic_Brochure.pdf"
@@ -527,7 +523,7 @@ const ApplicationsPage = () => {
     },
     {
       title: "Education",
-      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop",
       items: [
         "Classrooms",
         "Lecture Halls",
