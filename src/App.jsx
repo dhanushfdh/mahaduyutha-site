@@ -14,7 +14,7 @@ const Logo = ({ className = "w-8 h-8" }) => (
     strokeLinejoin="round" 
     className={className}
   >
-    {/* Stylized M based on the Mahadhuyutha logo */}
+    {/* Stylized M based on the MAHADHYUTHA logo */}
     <path d="M2,68 V8 L10,2 H18 L68,36 V68" />
     <path d="M98,68 V8 L90,2 H82 L46,24" />
   </svg>
@@ -55,13 +55,18 @@ const UniversalSlideshow = ({ images, interval = 4000 }) => {
   const goToNext = (e) => { e.stopPropagation(); setCurrentIndex((prev) => (prev + 1) % images.length); };
 
   return (
-    <div className="relative aspect-[16/10] md:aspect-[16/9] w-full glass-panel rounded-3xl overflow-hidden group shadow-2xl">
+    <div className="relative aspect-[16/10] md:aspect-[16/9] w-full glass-panel rounded-3xl overflow-hidden group shadow-2xl bg-slate-800/50">
       {images.map((img, idx) => (
         <div 
           key={img} 
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
         >
-          <img src={img} alt={`Installation ${idx + 1}`} className="w-full h-full object-cover" />
+          {/* Fallback image rendering for local images when previewing on the web */}
+            <img
+              src={img}
+              alt={`Installation ${idx + 1}`}
+              className="w-full h-full object-cover"
+            />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
         </div>
       ))}
@@ -118,7 +123,7 @@ const Header = ({ currentView, setCurrentView }) => {
       <header className="flex items-center justify-between px-6 md:px-8 py-6 max-w-7xl mx-auto w-full border-b border-white/5 backdrop-blur-sm sticky top-0 z-50">
         <button onClick={() => handleNavClick('home')} className="flex items-center space-x-3 focus:outline-none group z-50">
           <Logo className="w-9 h-9 text-white transition-transform group-hover:scale-110" />
-          <span className="text-white font-semibold tracking-[0.2em] text-sm uppercase group-hover:text-blue-200 transition-colors">Mahadhuyutha</span>
+          <span className="text-white font-semibold tracking-[0.2em] text-sm uppercase group-hover:text-blue-200 transition-colors">MAHADHYUTHA</span>
         </button>
         
         <nav className="hidden md:flex space-x-8 text-sm font-medium tracking-wide text-slate-300">
@@ -160,7 +165,7 @@ const Footer = ({ setCurrentView }) => (
       <div className="space-y-4">
         <div className="flex items-center space-x-3">
           <Logo className="w-8 h-8 text-white" />
-          <span className="text-white font-semibold tracking-widest text-sm uppercase">Mahadhuyutha</span>
+          <span className="text-white font-semibold tracking-widest text-sm uppercase">MAHADHYUTHA</span>
         </div>
         <p className="text-slate-400 text-sm leading-relaxed">Premium Acoustic Panels and Ceiling Systems designed for modern interiors.</p>
       </div>
@@ -176,9 +181,13 @@ const Footer = ({ setCurrentView }) => (
       <div>
         <h4 className="text-white font-bold mb-4 uppercase tracking-widest text-xs">Contact</h4>
         <ul className="space-y-3 text-sm text-slate-400">
+          <li className="flex items-start gap-2">
+            <svg className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span className="text-slate-400 leading-tight">Bengaluru, Karnataka, India</span>
+          </li>
           <li className="flex items-center gap-2">
             <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            <a href="mailto:info@mahaduyutha.in" className="hover:text-blue-300 transition-colors">info@mahaduyutha.in</a>
+            <a href="mailto:info@mahadhyutha.in" className="hover:text-blue-300 transition-colors">info@mahadhyutha.in</a>
           </li>
           <li className="flex items-center gap-2">
             <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -195,11 +204,14 @@ const Footer = ({ setCurrentView }) => (
           <a href="https://www.instagram.com/mahadhyutha_acoustic" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-pink-600/20 text-slate-400 hover:text-white transition-all">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
+          <a href="https://www.linkedin.com/in/mahadhyutha-acoustic-05b5593b8" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-700/30 text-slate-400 hover:text-white transition-all">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
         </div>
       </div>
     </div>
     <div className="max-w-7xl mx-auto border-t border-white/10 pt-8 text-xs text-slate-500 text-center md:text-left">
-      <p>© 2025 Mahadhuyutha. All rights reserved.</p>
+      <p>© 2025 MAHADHYUTHA. All rights reserved.</p>
     </div>
   </footer>
 );
@@ -228,9 +240,130 @@ const Hero = ({ setCurrentView }) => (
         <span>Get a Quote</span>
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
       </button>
+      <a
+        href="/brochure.pdf"
+        download="MAHADHYUTHA_Acoustic_Brochure.pdf"
+        className="px-8 py-4 bg-transparent text-blue-300 font-medium rounded-full border border-blue-500/30 hover:bg-blue-500/10 transition-all w-full sm:w-auto flex items-center justify-center space-x-2"
+      >
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+          />
+        </svg>
+
+        <span>Download Product Catalogue</span>
+      </a>
     </div>
   </div>
 );
+
+const InstallationsGallery = () => {
+  const installations = [
+    {
+      title: "Corporate Workspace",
+      subtitle: "Office Acoustic Panels",
+      image: "Corporate Workspace.jpg"
+    },
+    {
+      title: "Auditorium Hall",
+      subtitle: "Acoustic Ceiling Baffles",
+      image: "Auditorium Hall.jpg"
+    },
+    {
+      title: "Luxury Hotel Lobby",
+      subtitle: "Decorative Acoustic Panels",
+      image: "Luxury Hotel Lobby.jpg"
+    },
+    {
+      title: "Conference Room",
+      subtitle: "Sound Absorption Panels",
+      image: "Conference Room.jpg"
+    },
+    {
+      title: "Restaurant Interior",
+      subtitle: "Acoustic Ceiling Panels",
+      image: "Restaurant Interior.jpg"
+    },
+    {
+      title: "Home Theater",
+      subtitle: "Premium Sound Panels",
+      image: "Home Theatre.jpg"
+    }
+  ];
+
+  return (
+    <section className="mt-32 pt-16 border-t border-white/10 w-full">
+      {/* Header */}
+      <div className="mb-14 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Our <span className="text-blue-200">Installations</span>
+          </h2>
+          <p className="text-slate-400 max-w-2xl text-lg">
+            Discover our premium acoustic panel installations across corporate,
+            hospitality, residential, and entertainment spaces.
+          </p>
+        </div>
+
+        <button className="text-sm font-bold text-white uppercase tracking-wider hover:text-blue-300 transition-colors flex items-center gap-2">
+          View All Projects
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </button>
+      </div>
+
+      {/* Installations Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {installations.map((item, index) => (
+          <div
+            key={index}
+            className="glass-panel rounded-3xl overflow-hidden group hover:border-white/30 transition-all duration-500 cursor-pointer"
+          >
+            {/* Image */}
+            <div className="h-64 overflow-hidden relative">
+              <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition duration-500 z-10"></div>
+              <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
+                onError={(e) => { 
+                  // Fallback just in case the local image hasn't loaded properly in preview
+                  e.target.src = `https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800&text=${item.title}`;
+                }}
+              />
+            </div>
+
+            {/* Content */}
+            <div className="p-6 bg-slate-950/50">
+              <h3 className="text-xl font-bold text-white mb-1">
+                {item.title}
+              </h3>
+              <p className="text-sm text-blue-300 font-medium tracking-wide">
+                {item.subtitle}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 const SpecsTable = () => (
   <div className="mt-24">
@@ -268,10 +401,35 @@ const SpecsTable = () => (
 );
 
 const AcousticsPage = () => {
-  const images = ['8.jpg', '11.jpg', '12.jpg', '13.jpg', '15.jpg', '18.jpg', '26.jpg', '30.jpg', '34.jpg', '37.jpg'];
+  const images = [
+    '/acoustics/1.jpg',
+    '/acoustics/10.jpg',
+    '/acoustics/11.jpg',
+    '/acoustics/12.jpg',
+    '/acoustics/2.jpg',
+    '/acoustics/3.jpg',
+    '/acoustics/4.jpg',
+    '/acoustics/5.jpg',
+    '/acoustics/6.jpg',
+    '/acoustics/7.jpg',
+    '/acoustics/8.jpg',
+    '/acoustics/9.jpg'
+  ];
+      
+  // Expanded and refined color palette based on screenshot and acoustic panel norms
   const colors = [
-    { name: 'White', hex: '#f8fafc' }, { name: 'Nat. Beige', hex: '#d7ccc8' }, { name: 'Slate Grey', hex: '#78909c' },
-    { name: 'Midnight', hex: '#1c3144' }, { name: 'Teal', hex: '#00838f' }
+    { name: 'White', hex: '#f8fafc' }, 
+    { name: 'Sand', hex: '#e3d7cf' }, 
+    { name: 'Steel', hex: '#8ba1ab' },
+    { name: 'Midnight', hex: '#233746' }, 
+    { name: 'Teal', hex: '#0d8591' },
+    { name: 'Charcoal', hex: '#36383b' },
+    { name: 'Mustard', hex: '#cda34f' },
+    { name: 'Terracotta', hex: '#b55a4a' },
+    { name: 'Forest', hex: '#2f5a43' },
+    { name: 'Plum', hex: '#5f3a4b' },
+    { name: 'Silver', hex: '#c5c9cc' },
+    { name: 'Navy', hex: '#1e2b3c' }
   ];
 
   return (
@@ -288,17 +446,25 @@ const AcousticsPage = () => {
           <div><h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Thickness</h4><p className="mt-2 text-white font-medium text-lg">9mm, 12mm, 25mm</p></div>
           <div><h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">NRC</h4><p className="mt-2 text-white font-medium text-lg">Up to 0.70</p></div>
         </div>
+        
+        {/* Updated Color Options Section */}
         <div>
-          <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Color Options</h4>
-          <div className="flex flex-wrap gap-4">
+          <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.15em] mb-6">Color Options</h4>
+          <div className="flex flex-wrap gap-5">
             {colors.map(color => (
-              <div key={color.name} className="group relative">
-                <div className="w-10 h-10 rounded-full border-2 border-white/10 shadow-lg hover:scale-110 transition-all cursor-help" style={{ backgroundColor: color.hex }} />
-                <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-wider whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity text-slate-300">{color.name}</span>
+              <div key={color.name} className="group relative flex flex-col items-center">
+                <div 
+                  className="w-12 h-12 rounded-full transition-transform duration-300 cursor-pointer group-hover:-translate-y-1 ring-2 ring-transparent group-hover:ring-white/20 ring-offset-2 ring-offset-slate-950" 
+                  style={{ backgroundColor: color.hex, boxShadow: 'inset 0 0 10px rgba(0,0,0,0.1)' }} 
+                />
+                <span className="absolute -bottom-6 text-[10px] uppercase tracking-wider whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity text-slate-500 font-semibold pointer-events-none">
+                  {color.name}
+                </span>
               </div>
             ))}
           </div>
         </div>
+
       </div>
       <div className="lg:col-span-12">
         <SpecsTable />
@@ -308,7 +474,18 @@ const AcousticsPage = () => {
 };
 
 const CeilingPage = () => {
-  const images = ['img14.jpg', 'img16.jpg', 'img18.jpg', 'img20.jpg', 'img22.jpg', 'img24.jpg', 'img26.jpg', 'img28.jpg', 'img33.jpg', 'img37.jpg'];
+  const images = [
+    '/ceiling/1.jpg',
+    '/ceiling/10.jpg',
+    '/ceiling/2.jpg',
+    '/ceiling/3.jpg',
+    '/ceiling/4.jpg',
+    '/ceiling/5.jpg',
+    '/ceiling/6.jpg',
+    '/ceiling/7.jpg',
+    '/ceiling/8.jpg',
+    '/ceiling/9.jpg'
+  ];
   
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
@@ -335,46 +512,281 @@ const CeilingPage = () => {
 };
 
 const ApplicationsPage = () => {
-  const items = [
-    { title: "Corporate", img: "https://images.unsplash.com/photo-1497366216548-37526070297c" },
-    { title: "Education", img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1" },
-    { title: "Healthcare", img: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d" }
+  const applicationSectors = [
+    {
+      title: "Business & Corporate",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
+      items: [
+        "Board Rooms",
+        "Conference Rooms",
+        "Reception Areas",
+        "Cabins & Workstations",
+        "Office Lobbies",
+        "Corridors"
+      ]
+    },
+    {
+      title: "Education",
+      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop",
+      items: [
+        "Classrooms",
+        "Lecture Halls",
+        "Libraries",
+        "Music Rooms",
+        "Multipurpose Halls",
+        "Gymnasiums"
+      ]
+    },
+    {
+      title: "Theatres & Auditoriums",
+      image: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=800&auto=format&fit=crop",
+      items: [
+        "Cinema Theatres",
+        "Large Auditoriums",
+        "Marriage Halls",
+        "Recording Studios",
+        "Home Theatres"
+      ]
+    },
+    {
+      title: "Hospitality",
+      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop",
+      items: [
+        "Hotel Lobbies",
+        "Dining Areas",
+        "Guest Rooms",
+        "Meeting Rooms",
+        "Conference Halls"
+      ]
+    },
+    {
+      title: "Healthcare",
+      image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop",
+      items: [
+        "Hospital Reception",
+        "Waiting Areas",
+        "Wards",
+        "Operation Theatres",
+        "Corridors"
+      ]
+    },
+    {
+      title: "Residential",
+      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop",
+      items: [
+        "Living Rooms",
+        "Bedrooms",
+        "Home Offices",
+        "Home Theatre Rooms",
+        "Dining Rooms"
+      ]
+    }
   ];
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {items.map(item => (
-        <div key={item.title} className="glass-panel rounded-3xl overflow-hidden group">
-          <div className="h-48 relative overflow-hidden">
-            <img src={`${item.img}?q=80&w=800&auto=format&fit=crop`} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" alt={item.title} />
+    <div className="animate-[fadeIn_0.5s_ease-out]">
+      {/* Page Header */}
+      <div className="text-center mb-16">
+        <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+          Acoustic <span className="text-blue-200">Applications</span>
+        </h1>
+
+        <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+          Our acoustical panels and ceiling systems are engineered to improve sound quality
+          and interior aesthetics across a wide range of architectural environments.
+        </p>
+      </div>
+
+      {/* Application Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {applicationSectors.map((sector, idx) => (
+          <div
+            key={idx}
+            className="glass-panel rounded-3xl overflow-hidden group hover:border-white/30 transition-all duration-500 flex flex-col"
+          >
+            {/* Image */}
+            <div className="h-48 relative overflow-hidden">
+              <div className="absolute inset-0 bg-slate-900/60 mix-blend-multiply z-10 group-hover:bg-slate-900/40 transition-colors duration-500"></div>
+
+              <img
+                src={sector.image}
+                alt={sector.title}
+                loading="lazy"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+              />
+
+              <div className="absolute bottom-4 left-6 z-20">
+                <h3 className="text-xl font-bold text-white">
+                  {sector.title}
+                </h3>
+              </div>
+            </div>
+
+            {/* List */}
+            <div className="p-6 flex-1 flex flex-col bg-slate-950/40">
+              <ul className="space-y-3">
+                {sector.items.map((item, i) => (
+                  <li key={i} className="flex items-start text-sm text-slate-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 mr-3 shrink-0"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="p-6 bg-slate-950/40">
-            <h3 className="text-xl font-bold text-white">{item.title}</h3>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
 
 const AboutPage = () => (
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-    <div className="space-y-8">
-      <h1 className="text-4xl md:text-5xl font-bold text-white">About <span className="text-blue-200">Mahadhuyutha</span></h1>
-      <p className="text-lg text-slate-400 leading-relaxed">Mahadhuyutha offers world-class acoustic materials that elevate spaces to new lifestyle standards. Our products combine functional sound absorption with sophisticated design.</p>
-    </div>
-    <div className="glass-panel rounded-3xl p-8 space-y-8 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2"></div>
-      <h3 className="text-2xl font-bold text-white">Connect With Us</h3>
-      <div className="space-y-6">
+  <div className="animate-[fadeIn_0.5s_ease-out]">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      {/* About Text */}
+      <div className="space-y-8">
         <div>
-          <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">Inquiries</p>
-          <a href="tel:+916363146633" className="text-2xl font-bold text-white hover:text-blue-300 transition-colors">+91 63631 46633</a>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
+            About <br />
+            <span className="text-blue-200">MAHADHYUTHA</span>
+          </h1>
+          <div className="w-16 h-1 bg-blue-500/80 rounded-full"></div>
         </div>
-        <a href="https://wa.me/916363146633" target="_blank" rel="noreferrer" className="inline-flex items-center space-x-3 px-8 py-4 bg-green-500 text-white rounded-xl font-bold hover:scale-105 transition-transform">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z"/></svg>
-          <span>Chat on WhatsApp</span>
-        </a>
+
+        <div className="space-y-6 text-[15px] md:text-base text-slate-400 leading-[1.8] font-light">
+          <p>
+            MAHADHYUTHA was established with a vision to offer world-class
+            materials that elevate spaces to new lifestyle standards. Our
+            product range is carefully crafted to meet the versatile demands
+            of modern environments, combining functional design with
+            aesthetic appeal.
+          </p>
+          <p>
+            Each MAHADHYUTHA product introduces an element of
+            sophistication, transforming spaces with ease and elegance.
+          </p>
+          <p>
+            As a privately owned and fully integrated organization,
+            MAHADHYUTHA manufactures, markets, and distributes premium
+            building materials worldwide. Our extensive global network of
+            partners supports our mission to bring exceptional materials to
+            every corner of the world, ensuring seamless availability, sales, and
+            service.
+          </p>
+        </div>
       </div>
+
+      {/* Contact Card */}
+      <div className="glass-panel bg-[#12192b]/80 border-white/5 rounded-[2rem] p-8 md:p-10 relative overflow-hidden shadow-2xl">
+        <h3 className="text-2xl font-bold text-white mb-10">
+          Contact Information
+        </h3>
+        
+        <div className="space-y-8">
+          {/* Location */}
+          <div className="flex items-start gap-5 group">
+            <div className="w-12 h-12 rounded-full border border-slate-600/50 flex items-center justify-center shrink-0 bg-white/5 group-hover:bg-white/10 transition-colors">
+              <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-[11px] text-slate-400 uppercase tracking-[0.15em] font-semibold mb-2">
+                Location
+              </h4>
+              <div className="text-white font-medium text-[15px] leading-relaxed">
+                Global Headquarters<br />
+                Architectural & Industrial District<br />
+                Bengaluru, Karnataka, India
+              </div>
+            </div>
+          </div>
+
+          {/* Phone */}
+          <div className="flex items-center gap-5 group">
+            <div className="w-12 h-12 rounded-full border border-slate-600/50 flex items-center justify-center shrink-0 bg-white/5 group-hover:bg-white/10 transition-colors">
+              <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-[11px] text-slate-400 uppercase tracking-[0.15em] font-semibold mb-1">
+                Phone
+              </h4>
+              <a href="tel:+916363146633" className="text-white font-medium text-[15px] hover:text-blue-300 transition-colors">
+                +91 63631 46633
+              </a>
+            </div>
+          </div>
+
+          {/* WhatsApp */}
+          <div className="flex items-center gap-5 group">
+            <div className="w-12 h-12 rounded-full border border-slate-600/50 flex items-center justify-center shrink-0 bg-white/5 group-hover:bg-green-500/10 transition-colors">
+              <svg className="w-5 h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-[11px] text-slate-400 uppercase tracking-[0.15em] font-semibold mb-1">
+                WhatsApp
+              </h4>
+              <a href="https://wa.me/916363146633" className="text-white font-medium text-[15px] hover:text-[#25D366] transition-colors">
+                +91 63631 46633
+              </a>
+            </div>
+          </div>
+
+          {/* Email */}
+          <div className="flex items-center gap-5 group">
+            <div className="w-12 h-12 rounded-full border border-slate-600/50 flex items-center justify-center shrink-0 bg-white/5 group-hover:bg-white/10 transition-colors">
+              <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-[11px] text-slate-400 uppercase tracking-[0.15em] font-semibold mb-1">
+                Email
+              </h4>
+              <a href="mailto:info@mahadhyutha.in" className="text-white font-medium text-[15px] hover:text-blue-300 transition-colors">
+                info@mahadhyutha.in
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Get in Touch */}
+    <div className="mt-24 glass-panel rounded-3xl p-10 text-center">
+      <h2 className="text-3xl font-bold text-white mb-6">
+        Get in Touch
+      </h2>
+      <p className="text-slate-400 mb-10">
+        Contact us directly for product information, pricing, or project consultation.
+      </p>
+
+      {/* Phone Number */}
+      <div className="text-2xl font-bold text-white mb-8">
+        +91 63631 46633
+      </div>
+
+      {/* WhatsApp Button */}
+      <a
+        href="https://wa.me/916363146633"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-[#25D366] text-white font-semibold rounded-xl hover:bg-[#20bd5a] transition-all shadow-lg"
+      >
+        <svg
+          className="w-6 h-6"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771z"/>
+        </svg>
+        Chat on WhatsApp
+      </a>
     </div>
   </div>
 );
@@ -387,7 +799,20 @@ const App = () => {
   const [currentView, setCurrentView] = useState('home');
 
   useEffect(() => {
-    document.title = "Mahadhuyutha | Premium Acoustical Systems";
+    // Set the document title
+    document.title = "MAHADHYUTHA | Premium Acoustical Systems";
+
+    // Set the Favicon using the SVG Logo
+    const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
+    link.type = 'image/svg+xml';
+    link.rel = 'icon';
+    
+    // Injecting the SVG directly as a data URI for the tab icon
+    const faviconSvg = encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 70" fill="none" stroke="#60a5fa" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M2,68 V8 L10,2 H18 L68,36 V68" /><path d="M98,68 V8 L90,2 H82 L46,24" /></svg>`
+    );
+    link.href = `data:image/svg+xml,${faviconSvg}`;
+    document.getElementsByTagName('head')[0].appendChild(link);
   }, []);
 
   return (
@@ -425,7 +850,12 @@ const App = () => {
             Back to Home
           </button>
           
-          {currentView === 'home' && <Hero setCurrentView={setCurrentView} />}
+          {currentView === 'home' && (
+            <>
+              <Hero setCurrentView={setCurrentView} />
+              <InstallationsGallery />
+            </>
+          )}
           {currentView === 'product' && <AcousticsPage />}
           {currentView === 'ceiling' && <CeilingPage />}
           {currentView === 'applications' && <ApplicationsPage />}
