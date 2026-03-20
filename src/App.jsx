@@ -692,8 +692,6 @@ const AboutPage = () => (
                 Location
               </h4>
               <div className="text-white font-medium text-[15px] leading-relaxed">
-                Global Headquarters<br />
-                Architectural & Industrial District<br />
                 Bengaluru, Karnataka, India
               </div>
             </div>
