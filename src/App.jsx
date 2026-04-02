@@ -236,27 +236,6 @@ const Hero = ({ setCurrentView }) => (
         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
         <span className="relative">Explore Products</span>
       </button>
-      <a
-        href="/brochure.pdf"
-        download="MAHADHYUTHA_Acoustic_Brochure.pdf"
-        className="px-8 py-4 bg-transparent text-blue-300 font-medium rounded-full border border-blue-500/30 hover:bg-blue-500/10 transition-all w-full sm:w-auto flex items-center justify-center space-x-2"
-      >
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-          />
-        </svg>
-
-        <span>Download Product Catalogue</span>
-      </a>
     </div>
   </div>
 );
